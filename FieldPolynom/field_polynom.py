@@ -193,17 +193,20 @@ class FPolynom:
 	def Copy(self):
 		return FPolynom(self.field, self.c[:], True)
 		
-	def Value(self, x):
+	def Value(self, x, isField = True):
 		v = FElement(self.field, 0)
 		for i in range(len(self.c)):
 			v = v + self.c[i] * FPow(self.field, x, i)
-		return v
+		if (isField == True):
+			return v
+		else:
+			return v.f 
 		
-	def Values(self):
+	def Values(self, isField = True):
 		N = 2 ** self.field.n
 		values = []
 		for i in range(N):
-			values.append(self.Value(FElement(self.field, i)))
+			values.append(self.Value(FElement(self.field, i), isField))
 		return values
 
 	def FromPermutation(self, perm, isFieldPerm = False):
