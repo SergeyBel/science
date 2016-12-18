@@ -96,11 +96,9 @@ def FuncPolynom1():
 	print "FuncPolynom1:",
 	F = ffield.FField(2)
 	f = [1, 3, 0, 2] #t*x^2 + 1
-	answer = [FElement(F, 1), FElement(F, 0), FElement(F, 2), FElement(F, 0)]
-	for i in range(len(f)):
-		f[i] = FElement(F, f[i])
-	
-	pol = FuncPolynom(F, f)
+	answer = FPolynom(F, [FElement(F, 1), FElement(F, 0), FElement(F, 2), FElement(F, 0)], True)
+	pol = FPolynom(F, [])
+	pol.FromPermutation(f)
 	Test(pol, answer)
 	
 def FieldFuncToBooleanFunc1():
@@ -114,11 +112,9 @@ def DegField1():
 	F = ffield.FField(2)
 	f = [1, 3, 0, 2] #t*x^2 + 1
 	answer = 2
-	for i in range(len(f)):
-		f[i] = FElement(F, f[i])
-	
-	pol = FuncPolynom(F, f)
-	Test(DegPolynom(F, pol), answer)
+	pol = FPolynom(F, [])
+	pol.FromPermutation(f)
+	Test(pol.Deg(), answer)
 
 	
 def PolynomAdd1():

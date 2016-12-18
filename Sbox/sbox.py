@@ -53,11 +53,11 @@ print
 fieldFunc = [0] * len(sbox)
 
 eq = FieldFuncToBooleanFunc(sbox, F.n)
-#PrintEquations(eq)
+PrintEquations(eq)
 
-for i in range(len(sbox)):
-	fieldFunc[i] = FElement(F, sbox[i])
-c =  FuncPolynom(F, fieldFunc)
+
+c = FPolynom(F, [])
+c.FromPermutation(sbox)
 
 cycles = GetCycles(sbox)
 cycleString = StrCycles(cycles)
@@ -74,10 +74,10 @@ for i in range (len(eq)):
 
 print
 print "Field polymom:"
-print '{:140s}'.format(StrPolynom(F, c, False))
+print '{:140s}'.format(c)
 print
 print "Field polynom deg:"
-print '{:2s}'.format(str(DegPolynom(F, c)))
+print c.Deg()
 print
 print "Cycle struct:"
 print '{:20s}'.format(cycleString)

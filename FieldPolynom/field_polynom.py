@@ -206,7 +206,22 @@ class FPolynom:
 		for i in range(N):
 			values.append(self.Value(FElement(self.field, i)))
 		return values
-			
+
+	def FromPermutation(self, perm, isFieldPerm = False):
+		n = 2**self.field.n
+		self.c = [FElement(self.field, 0)] * n
+		constants = list()
+		for i in range(n):
+			constants.append(FElement(self.field, i))
+
+		if (isFieldPerm == False):
+			perm = FuncToFieldFunc(self.field, perm)
+		
+		for i in range(n - 1):
+			for j in range(n):
+				self.c[i]  += perm[j] * FieldPow(constants[j], n - i - 1)
+		self.Correct()
+
 
 		
 
