@@ -7,7 +7,6 @@ sys.path.append("../Cryptonalysis")
 from DifferentialCryptanalisys import *
 from LineCryptoanalisys import *
 from ffield import *
-
 from  boolean import *
 from field_func import *
 import itertools
@@ -222,6 +221,17 @@ class FPolynom:
 				self.c[i]  += perm[j] * FieldPow(constants[j], n - i - 1)
 		self.Correct()
 
+	def IsLinear(self):
+		for i in range(len(self.c)):
+			if (not self.c[i] == FElement(self.field, 0)) and IsPowerTwo(i) == False:
+				return False
+		return True
+
+	def IsAffine(self):
+		for i in range(len(self.c)):
+			if (not self.c[i] == FElement(self.field, 0)) and IsPowerTwo(i) == False and i != 0:
+				return False
+		return True
 
 		
 

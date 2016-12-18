@@ -20,3 +20,7 @@ def SwapArr(a, i, j):
 	c = a[i]
 	a[i] = a[j]
 	a[j] = c
+
+def IsPowerTwo(n):
+	return n > 0 and not ((n & (n - 1)))
+

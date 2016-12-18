@@ -269,6 +269,35 @@ def PolynomDerivative1():
 	answer = FPolynom(F, [23, 0, 176, 0, 87, 0, 30])
 	Test(y, answer)
 
+def IsLinear1():
+	print "IsLinear1:",
+	F = FField(2)
+	x = FPolynom(F, [0, 1, 1, 0, 1, 0, 0, 0, 1])
+	answer = True
+	Test(x.IsLinear(), answer)
+
+def IsLinear2():
+	print "IsLinear2:",
+	F = FField(4)
+	x = FPolynom(F, [0, 1, 1, 3, 1, 0, 0, 0, 1])
+	answer = False
+	Test(x.IsLinear(), answer)
+
+def IsAffine1():
+	print "IsAffine1:",
+	F = FField(2)
+	x = FPolynom(F, [1, 1, 1, 0, 1, 0, 0, 0, 1])
+	answer = True
+	Test(x.IsAffine(), answer)
+
+def IsAffine2():
+	print "IsAffine2:",
+	F = FField(4)
+	x = FPolynom(F, [3, 1, 1, 0, 1, 0, 0, 2, 1])
+	answer = False
+	Test(x.IsAffine(), answer)
+
+
 
 def Berlekamp1():
 	print "Berlekemp1:",
@@ -430,6 +459,10 @@ def PolynomSuite():
 	PolynomEquilid1()
 	PolynomEquilid2()
 	PolynomDerivative1()
+	IsLinear1()
+	IsLinear2()
+	IsAffine1()
+	IsAffine2()
 	
 def AlgorithmSuite():
 	Berlekamp1()
