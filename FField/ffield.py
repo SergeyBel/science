@@ -171,6 +171,7 @@ class FField:
             (4,1,0) = [1, 1, 0, 0, 1]
             reverse([1, 1, 0, 0, 1]) = [1, 0, 0, 1, 1] = 19
             (4, 1, 0) = 19
+        3. If you use non-default generator set LUT=0 always
         """
         
         self.n = n 
