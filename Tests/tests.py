@@ -297,6 +297,12 @@ def IsAffine2():
 	answer = False
 	Test(x.IsAffine(), answer)
 
+def PolynomRank1():
+	print "PolynomRank1:",
+	F = FField(4)
+	x = FPolynom(F, [3, 1, 1, 0, 1, 0, 0, 2, 1])
+	answer = 6
+	Test(x.Rank(), answer)
 
 
 def Berlekamp1():
@@ -463,6 +469,7 @@ def PolynomSuite():
 	IsLinear2()
 	IsAffine1()
 	IsAffine2()
+	PolynomRank1()
 	
 def AlgorithmSuite():
 	Berlekamp1()
