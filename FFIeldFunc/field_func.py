@@ -3,9 +3,9 @@ from ffield import FElement
 import ffield
 from boolean import *
 
-def FieldPow(x, n):
-	p = x
-	for i in range(n - 1):
+def FieldPow(F, x, n):
+	p = FElement(F, 1)
+	for i in range(n):
 		p = p * x
 	return p	
 	

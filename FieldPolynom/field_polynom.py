@@ -219,9 +219,10 @@ class FPolynom:
 		if (isFieldPerm == False):
 			perm = FuncToFieldFunc(self.field, perm)
 		
-		for i in range(n - 1):
+		for i in range(1, n):
 			for j in range(n):
-				self.c[i]  += perm[j] * FieldPow(constants[j], n - i - 1)
+				self.c[i]  += perm[j] * FieldPow(self.field, constants[j], n - i - 1)
+		self.c[0] = perm[0];
 		self.Correct()
 
 	def IsLinear(self):

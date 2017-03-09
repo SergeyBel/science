@@ -100,7 +100,26 @@ def FuncPolynom1():
 	pol = FPolynom(F, [])
 	pol.FromPermutation(f)
 	Test(pol, answer)
-	
+
+def FuncPolynom2():
+	print "FuncPolynom2:",
+	F = ffield.FField(2)
+	f = [1, 2, 2, 0] #x^3 + x^2 + x(t + 1) + 1
+	answer = FPolynom(F, [1, 3, 1, 1])
+	pol = FPolynom(F, [])
+	pol.FromPermutation(f)
+	Test(pol, answer)
+
+def FuncPolynom3():
+	print "FuncPolynom3:",
+	F = ffield.FField(2)
+	f = [1, 1, 1, 1] 
+	answer = f
+	pol = FPolynom(F, [])
+	pol.FromPermutation(f)
+	Test(pol.Values(False), answer)
+
+
 def FieldFuncToBooleanFunc1():
 	print "FieldFuncToBooleanFunc1:",
 	f = [1, 3, 0, 2]
@@ -445,6 +464,8 @@ def BoolSuite():
 	
 def FieldSuite():
 	FuncPolynom1()
+	FuncPolynom2()
+	FuncPolynom3()
 	FieldFuncToBooleanFunc1()
 	DegField1()
 	
@@ -502,5 +523,4 @@ MatrixSuite()
 print
 print "OK: ", success
 print "FAIL: ", fail
-
 
