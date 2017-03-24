@@ -22,7 +22,7 @@ def NextBoolVec(vec):
 	while (t[i] == "1" and i >= 0):
 		i = i - 1
 	if i < 0:
-		return ""
+		return False
 	t[i] = "1"
 	for j in range(i + 1, len(vec)):
 		t[j] = "0"
@@ -45,7 +45,7 @@ def WalshCoeff(f, u, n):
 def WalshSpectrum(f, n):
 	res = list()
 	u = "0" * n
-	while u != "":
+	while u != False:
 		res.append(WalshCoeff(f, u, n))
 		u = NextBoolVec(u)
 	return res
@@ -68,7 +68,7 @@ def FourierCoeff(f, u, n):
 def FourierSpectrum(f, n):
 	res = list()
 	u = "0" * n
-	while u != "":
+	while u != False:
 		res.append(FourierCoeff(f, u, n))
 		u = NextBoolVec(u)
 	return res
@@ -78,7 +78,7 @@ def NonlineartyBool(f):
 	n = int(math.log(len(f), 2))
 	u = "0" * n
 	max = -(2**(n)) - 1
-	while u != "":
+	while u != False:
 		c = abs(WalshCoeff(f, u, n))
 		if  c > max:
 			max = c
@@ -88,8 +88,6 @@ def NonlineartyBool(f):
 			
 		
 	
-
-
 def IsLinear(boolVec, n):
 	if (n == 0):
 		return True
