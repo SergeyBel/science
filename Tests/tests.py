@@ -447,6 +447,22 @@ def MatrixGetColumn1():
 	ans = [FElement(F, 1), FElement(F, 0), FElement(F, 0), FElement(F, 0), FElement(F, 0)]
 	Test(r, ans)
 
+def MatrixInverse():
+	print "MatrixInverse:",
+
+	F = FField(2)
+	m = FMatrix(F, 4, 4)
+	m.SetRow(0, [FElement(F, 0), FElement(F, 0), FElement(F, 0), FElement(F, 1)])
+	m.SetRow(1, [FElement(F, 0), FElement(F, 0), FElement(F, 1), FElement(F, 0)])
+	m.SetRow(2, [FElement(F, 0), FElement(F, 1), FElement(F, 0), FElement(F, 0)])
+	m.SetRow(3, [FElement(F, 1), FElement(F, 0), FElement(F, 0), FElement(F, 1)])
+	inv = m.Inverse()
+	ans = FMatrix(F, 4, 4)
+	ans.SetRow(0, [FElement(F, 1), FElement(F, 0), FElement(F, 0), FElement(F, 1)])
+	ans.SetRow(1, [FElement(F, 0), FElement(F, 0), FElement(F, 1), FElement(F, 0)])
+	ans.SetRow(2, [FElement(F, 0), FElement(F, 1), FElement(F, 0), FElement(F, 0)])
+	ans.SetRow(3, [FElement(F, 1), FElement(F, 0), FElement(F, 0), FElement(F, 0)])
+	Test(inv, ans)
 
 	
 def BoolSuite():
@@ -511,6 +527,7 @@ def PermutationSuite():
 def MatrixSuite():
 	MatrixGetRow1()
 	MatrixGetColumn1()
+	MatrixInverse()
 	
 
 BoolSuite()

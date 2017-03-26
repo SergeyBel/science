@@ -87,6 +87,11 @@ class FMatrix:
 			if IsNullRow(self.field, r):
 				basis.append(C.GetRow(i))
 		return basis
+
+	def Inverse(self):
+		m = self.Copy()
+		m.matrix = self.matrix.Inverse()
+		return m
 		
 	def __mul__(self, other):
 		m = self.Copy()
@@ -102,6 +107,14 @@ class FMatrix:
 		m = self.Copy()
 		m.matrix = self.matrix - other.matrix
 		return m
+
+	def __eq__(self, other):
+		if (self.n != other.n or self.m != other.m):
+			return False
+		for i in range(self.n):
+			if self.GetRow(i) != other.GetRow(i):
+				return False
+		return True
 		
 	def __setitem__ (self, (x,y), data):
 		self.matrix[x][y] = data

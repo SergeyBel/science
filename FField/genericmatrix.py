@@ -297,6 +297,7 @@ ValueError: matrix not invertible
                                              other.data[i][j])
         return result
 
+
     def __setitem__ (self, (x,y), data):
         "__setitem__((x,y),data) sets item row x and column y to data."
         self.data[x][y] = data
@@ -469,7 +470,7 @@ ValueError: matrix not invertible
         """
 
         lastRow = self.rows-1
-        while (rowIndex < lastRow):
+        while (rowIndex <= lastRow):
             if (colIndex >= self.cols):
                 return (rowIndex, colIndex)
             if (self.eq(self.zeroElement,self.data[rowIndex][colIndex])):
@@ -510,7 +511,7 @@ ValueError: matrix not invertible
             resultInv = self.MakeSimilarMatrix(self.Size(),'i')
             
         (rowIndex,colIndex) = (0,0)
-        lastRow = min(self.rows - 1,self.cols)
+        lastRow = min(self.rows - 1, self.cols)
         lastCol = self.cols - 1
         while( rowIndex <= lastRow and colIndex <= lastCol):
             leader = self.FindRowLeader(rowIndex,colIndex)
