@@ -135,6 +135,13 @@ def DegField1():
 	pol.FromPermutation(f)
 	Test(pol.Deg(), answer)
 
+def DualBasis1():
+	print "DualBasis1:",
+	F = FField(4)
+	dualBasis = DualBasis(F)
+	answer = [FElement(F, 9), FElement(F, 2), FElement(F, 4), FElement(F, 8)]
+	Test(dualBasis, answer)
+
 	
 def PolynomAdd1():
 	print "PolynomAdd1:",
@@ -484,6 +491,7 @@ def FieldSuite():
 	FuncPolynom3()
 	FieldFuncToBooleanFunc1()
 	DegField1()
+	DualBasis1()
 	
 def PolynomSuite():
 	PolynomAdd1()

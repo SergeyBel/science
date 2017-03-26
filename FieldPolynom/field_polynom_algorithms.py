@@ -1,4 +1,7 @@
+import sys
+sys.path.append("../FieldMatrix")
 from field_polynom import *
+from fieldmatrix import *
 
 def PolynomEquilid(F, x, y):
 	if (x.Deg() < y.Deg()):
@@ -77,8 +80,37 @@ def NextAffinePolynom(F, f):
 	else:
 		g.c[0] = FElement(F, g.c[0].f + 1)
 	return g
-		
-	
 
+#return FPolynom Tr(b*x)
+def CreateTr(F, betta):
+	n = F.n
+	coeffs = [FElement(F, 0)] * 2**n
+	for i in range(n):
+		j = 2**i
+		c = FPow(F, betta, 2**i)
+		coeffs[j] = c
+	return FPolynom(F, coeffs, True)
+	
+def DualBasis(F):
+	n = F.n
+	alpha = FElement(F, 2)
+	basis = list()
+	dualBasis = list()
+	tr = CreateTr(F, FElement(F, 1))
+	for i in range(n):
+		basis.append(FPow(F, alpha, i))
+
+	a = FMatrix(F, n, n)
+	for i in range(n):
+		for j in range(n):
+			a[i, j] = tr.Value(basis[i] * basis[j])
+	b = a.Inverse()
+	for i in range(n):
+		num = "";
+		t = b.GetRow(i)
+		for j in range(len(t)):
+			num += str(t[j].f)
+		dualBasis.append(FElement(F, BinaryStrToValue(num)))
+	return dualBasis
 
 	

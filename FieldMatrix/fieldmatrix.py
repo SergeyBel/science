@@ -117,10 +117,10 @@ class FMatrix:
 		return True
 		
 	def __setitem__ (self, (x,y), data):
-		self.matrix[x][y] = data
+		self.matrix[x, y] = data
 
 	def __getitem__ (self, (x,y)):
-		return self.matrix[x][y]
+		return self.matrix[x, y]
 		
 	def __str__(self):
 		return str(self.matrix)

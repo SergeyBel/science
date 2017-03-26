@@ -236,6 +236,7 @@ class FPolynom:
 			if (not self.c[i] == FElement(self.field, 0)) and IsPowerTwo(i) == False and i != 0:
 				return False
 		return True
+
 	def Rank(self):
 		rank = 0
 		for i in range(len(self.c)):
