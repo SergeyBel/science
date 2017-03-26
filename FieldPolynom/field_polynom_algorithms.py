@@ -110,7 +110,24 @@ def DualBasis(F):
 		t = b.GetRow(i)
 		for j in range(len(t)):
 			num += str(t[j].f)
-		dualBasis.append(FElement(F, BinaryStrToValue(num)))
+		dualBasis.append(FElement(F, BinaryStrToValue(num[::-1])))
 	return dualBasis
 
-	
+def FromZhekalkinPolynom(F, coeffs):
+	n = F.n
+	coords = []
+	dualBasis = DualBasis(F)
+	dualBasis = dualBasis[::-1]
+	f = FPolynom(F, [])
+	for i in range(n):
+		coords.append(CreateTr(F, dualBasis[i]))
+	for i in range(len(coeffs)):
+		if (coeffs[i] == "1"):
+			monom = FPolynom(F, [1])
+			for j in range(n):
+				decomp = list(ValueToBinaryStr(i, n))
+				if decomp[j] == "1":
+					monom *= coords[j];
+			f += monom
+	f.Reduce()
+	return f

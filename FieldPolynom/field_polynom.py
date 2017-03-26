@@ -244,5 +244,16 @@ class FPolynom:
 				rank +=1
 		return rank
 
+	#reduce polynom in field using x^q = x
+	def Reduce(self):
+		N = 2** self.field.n
+		for i in range(N, len(self.c)):
+			j = i % N + 1
+			self.c[j] += self.c[i]
+			self.c[i] = FElement(self.field, 0)
+		self.Correct()
+
+
+
 		
 

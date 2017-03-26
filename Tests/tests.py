@@ -139,7 +139,7 @@ def DualBasis1():
 	print "DualBasis1:",
 	F = FField(4)
 	dualBasis = DualBasis(F)
-	answer = [FElement(F, 9), FElement(F, 2), FElement(F, 4), FElement(F, 8)]
+	answer = [FElement(F, 9), FElement(F, 4), FElement(F, 2), FElement(F, 1)]
 	Test(dualBasis, answer)
 
 	
@@ -330,6 +330,40 @@ def PolynomRank1():
 	answer = 6
 	Test(x.Rank(), answer)
 
+def PolynomReduce1():
+	print "PolynomReduce1:",
+	F = FField(2)
+	f = FPolynom(F, [1, 1, 1, 1, 1])
+	f.Reduce()
+	answer = FPolynom(F,[1, 0, 1, 1])
+	Test(f, answer)
+
+def FromZhekalkinPolynom1():
+	print "FromZhekalkinPolynom1:",
+	F = FField(2)
+	f = "0011"
+	zhekalkin = ZhegalkinPolynom(f)
+	g = FromZhekalkinPolynom(F, zhekalkin)
+	answer = FPolynom(F, [0, 1, 1])
+	Test(g, answer)
+
+def FromZhekalkinPolynom2():
+	print "FromZhekalkinPolynom2:",
+	F = FField(2)
+	f = "0001"
+	zhekalkin = ZhegalkinPolynom(f)
+	g = FromZhekalkinPolynom(F, zhekalkin)
+	answer = FPolynom(F, [0, 2, 3, 1])
+	Test(g, answer)
+
+def FromZhekalkinPolynom3():
+	print "FromZhekalkinPolynom3:",
+	F = FField(2)
+	f = "0110"
+	zhekalkin = ZhegalkinPolynom(f)
+	g = FromZhekalkinPolynom(F, zhekalkin)
+	answer = FPolynom(F, [0, 2, 3])
+	Test(g, answer)
 
 def Berlekamp1():
 	print "Berlekemp1:",
@@ -515,6 +549,10 @@ def PolynomSuite():
 	IsAffine1()
 	IsAffine2()
 	PolynomRank1()
+	PolynomReduce1()
+	FromZhekalkinPolynom1()
+	FromZhekalkinPolynom2()
+	FromZhekalkinPolynom3()
 	
 def AlgorithmSuite():
 	Berlekamp1()
