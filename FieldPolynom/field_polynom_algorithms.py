@@ -127,8 +127,8 @@ def FromZhekalkinPolynom(F, coeffs):
 	for i in range(len(coeffs)):
 		if (coeffs[i] == "1"):
 			monom = FPolynom(F, [1])
+			decomp = list(ValueToBinaryStr(i, n))
 			for j in range(n):
-				decomp = list(ValueToBinaryStr(i, n))
 				if decomp[j] == "1":
 					monom *= coords[j];
 			f += monom
