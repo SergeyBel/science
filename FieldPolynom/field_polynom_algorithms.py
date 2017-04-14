@@ -27,8 +27,13 @@ def PolynomEquilid(F, x, y):
 	
 def PolynomPow(F, x, n):
 	p = FPolynom(F, [1])
-	for i in range(n):
-		p = p * x
+	while (n):
+		if (n & 1):
+			p *= x;
+			n -= 1
+		else:
+			x *= x;
+			n >>= 1;
 	return p
 	
 def RandomFPolynom(F, n):
@@ -97,13 +102,11 @@ def DualBasis(F):
 	basis = list()
 	dualBasis = list()
 	tr = CreateTr(F, FElement(F, 1))
-	for i in range(n):
-		basis.append(FPow(F, alpha, i))
 
 	a = FMatrix(F, n, n)
 	for i in range(n):
-		for j in range(n):
-			a[i, j] = tr.Value(basis[i] * basis[j])
+		for j in range(i + 1):
+			a[j, i] = a[i, j] = tr.Value(FPow(F, alpha, i + j))
 	b = a.Inverse()
 	for i in range(n):
 		num = "";
