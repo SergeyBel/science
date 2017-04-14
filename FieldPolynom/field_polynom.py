@@ -57,15 +57,19 @@ def PolynomCorrect(F, x):
 def PolynomAdd(F, x, y): 
 	lenX = len(x)
 	lenY = len(y)
+	ans = []
 	if lenX > lenY:
-		ans = x[:]
+		c = x
+		m = lenX
 		n = lenY
 	else:
-		ans = y[:]
+		c = y
+		m = lenY
 		n = lenX
 		
 	for i in range(n):
-		ans[i] = x[i] + y[i]
+		ans.append(x[i] + y[i])
+	ans[n:m] = c[n:m]
 	return PolynomCorrect(F, ans)
 	
 def PolynomSub(F, x, y):
@@ -114,8 +118,13 @@ def PolynomNormalize(F, x):
 	
 def FPow(F, x, n):
 	p = FElement(F, 1)
-	for i in range(n):
-		p = p * x
+	while (n):
+		if (n & 1):
+			p *= x;
+			n -= 1
+		else:
+			x *= x;
+			n >>= 1;
 	return p
 
 
