@@ -539,7 +539,7 @@ x^4 + x^3
 
     def __div__(self,other):
         assert self.field == other.field
-        return FElement(self.field,self.field.Divide(self.f,other.f))
+        return FElement(self.field,self.field.DoDivide(self.f,other.f))
 
     def __str__(self):
         #return self.field.ShowPolynomial(self.f)
