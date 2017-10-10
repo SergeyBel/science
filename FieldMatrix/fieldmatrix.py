@@ -4,6 +4,7 @@ from ffield import *
 from genericmatrix import *
 
 
+
 # functions for compatibility with GenericMatrix constructor
 def AddAbstract(x, y):
 	return x + y
@@ -30,6 +31,7 @@ def IsNullRow(F, r):
 		if not (r[j] == FElement(F, 0)):
 			return False
 	return True;
+
 	
 class FMatrix:
 	def __init__(self, F, n, m):
@@ -92,6 +94,11 @@ class FMatrix:
 		m = self.Copy()
 		m.matrix = self.matrix.Inverse()
 		return m
+
+
+	def Solve(self, b):
+		x = self.matrix.Solve(b)
+		return x
 		
 	def __mul__(self, other):
 		m = self.Copy()

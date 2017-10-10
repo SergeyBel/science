@@ -698,12 +698,12 @@ ValueError: matrix not invertible
         
         (L,U,P) = self.LUP()
         Pb = P.LeftMulColumnVec(b)
-        y = [0]*len(Pb)
+        y = [self.zeroElement]*len(Pb)
         for row in range(L.rows):
             y[row] = Pb[row]
             for i in range(row+1,L.rows):
                 Pb[i] = L.sub(Pb[i],L.mul(L[i,row],Pb[row]))
-        x = [0]*self.cols
+        x = [self.zeroElement]*self.cols
         curRow = self.rows-1
 
         for curRow in range(len(y)-1,-1,-1):
