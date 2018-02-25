@@ -1,7 +1,8 @@
 	
-def ValueToBinaryStr(value, length):
+def ValueToBinaryStr(value, length = False):
 	s = bin(value)[2:]
-	s  = "0" * (length - len(s)) + s
+	if length != False:
+		s  = "0" * (length - len(s)) + s
 	return s
 
 def BinaryStrToValue(str):

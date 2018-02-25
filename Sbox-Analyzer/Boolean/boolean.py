@@ -165,7 +165,10 @@ def Deg(func):
 				max = k;
 	return max
 			
-			
-	
+def BooleanToList(f):
+	c = []
+	for i in range(len(f)):
+		c.append(int(f[i]))
+	return c
 	
 	

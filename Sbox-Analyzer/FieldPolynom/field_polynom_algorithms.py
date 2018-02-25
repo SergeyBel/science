@@ -134,3 +134,36 @@ def FromZhekalkinPolynom(F, coeffs):
 			f += monom
 	f.Reduce()
 	return f
+
+def FromInt (F, a):
+  g = ValueToBinaryStr(a)[::-1]
+  c = []
+  for j in range(len(g)):
+    c.append(int(g[j]))
+  return FPolynom(F, c)
+
+def PolyPow(F, f, n):
+	p = FPolynom(F, [0, 1])
+	while (n):
+		if (n & 1):
+			p *= f;
+			n -= 1
+		else:
+			f *= f;
+			n >>= 1;
+	return p
+
+# now works only for n = 2^k
+def IrreducibleProduct(F, n):
+	N = 2**n
+	c1 = [0] * (N + 1)
+	c2 = [0] * (N + 1)
+	c1[1] = 1
+	c1[N] = 1
+	c2[1] = 1
+	c2[2**(n / 2)] = 1
+	d1 = FPolynom(F, c1) #x^{2^n}  - x
+	d2 = FPolynom(F, c2) #x ^{2^{n/2}= x}
+	d = d1 / d2
+	return d
+
