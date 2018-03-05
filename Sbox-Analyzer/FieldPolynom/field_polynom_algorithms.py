@@ -1,7 +1,9 @@
 import sys
 sys.path.append("../FieldMatrix")
+sys.path.append("../Boolean")
 from field_polynom import *
 from fieldmatrix import *
+from boolean import *
 
 def PolynomEquilid(F, x, y):
 	if (x.Deg() < y.Deg()):
@@ -153,17 +155,19 @@ def PolyPow(F, f, n):
 			n >>= 1;
 	return p
 
-# now works only for n = 2^k
-def IrreducibleProduct(F, n):
-	N = 2**n
-	c1 = [0] * (N + 1)
-	c2 = [0] * (N + 1)
-	c1[1] = 1
-	c1[N] = 1
-	c2[1] = 1
-	c2[2**(n / 2)] = 1
-	d1 = FPolynom(F, c1) #x^{2^n}  - x
-	d2 = FPolynom(F, c2) #x ^{2^{n/2}= x}
-	d = d1 / d2
-	return d
 
+
+def IrreducableProduct(F, n):
+	divisors = NumberDivisors(n)
+	f = FPolynom(F, [1])
+	for d in divisors:
+		c = [0] * (2**(n / d) + 1)
+		c[1] = 1
+		c[2**(n / d)] = 1
+		g = FPolynom(F, c)
+		m = Mobius(d)
+		if m == 1:
+			f *= g
+		elif m == -1:
+			f /= g
+	return f
