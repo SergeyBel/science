@@ -157,7 +157,7 @@ def PolyPow(F, f, n):
 
 
 
-def IrreducableProduct(F, n):
+def IrreducibleProduct(F, n):
 	divisors = NumberDivisors(n)
 	f = FPolynom(F, [1])
 	for d in divisors:

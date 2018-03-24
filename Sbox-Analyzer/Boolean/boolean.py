@@ -77,14 +77,14 @@ def FourierSpectrum(f, n):
 def NonlineartyBool(f):
 	n = int(math.log(len(f), 2))
 	u = "0" * n
-	max = -(2**(n)) - 1
+	maxn = -(2**(n)) - 1
 	while u != False:
 		c = abs(WalshCoeff(f, u, n))
-		if  c > max:
-			max = c
+		if  c > maxn:
+			maxn = c
 		u = NextBoolVec(u)
 			
-	return 2**(n - 1) - max / 2
+	return 2**(n - 1) - maxn / 2
 			
 		
 	
