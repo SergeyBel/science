@@ -144,17 +144,6 @@ def FromInt (F, a):
     c.append(int(g[j]))
   return FPolynom(F, c)
 
-def PolyPow(F, f, n):
-	p = FPolynom(F, [0, 1])
-	while (n):
-		if (n & 1):
-			p *= f;
-			n -= 1
-		else:
-			f *= f;
-			n >>= 1;
-	return p
-
 
 
 def IrreducibleProduct(F, n):

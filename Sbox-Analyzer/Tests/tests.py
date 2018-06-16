@@ -382,6 +382,24 @@ def FromZhekalkinPolynom4():
 	answer = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
 	Test(g.Values(False), answer)
 
+def PolynomPow1():
+	F = FField(2)
+	x = PolynomPow(F, FPolynom(F, [0, 1, 1]), 2)
+	answer = FPolynom(F, [0, 0, 1, 0, 1])
+	Test(x, answer)
+
+def PolynomPow2():
+	F = FField(2)
+	x = PolynomPow(F, FPolynom(F, []), 1)
+	answer = FPolynom(F, [])
+	Test(x, answer)
+
+def PolynomPow3():
+	F = FField(2)
+	x = PolynomPow(F, FPolynom(F, []), 0)
+	answer = FPolynom(F, [1])
+	Test(x, answer)
+
 def Berlekamp1():
 	print "Berlekemp1:",
 	F = FField(1)
@@ -572,6 +590,9 @@ def PolynomSuite():
 	FromZhekalkinPolynom2()
 	FromZhekalkinPolynom3()
 	FromZhekalkinPolynom4()
+	PolynomPow1()
+	PolynomPow2()
+	PolynomPow3()
 	
 def AlgorithmSuite():
 	Berlekamp1()
