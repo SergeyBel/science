@@ -28,23 +28,26 @@ def StrPolynom(F, coeffs, polynom = False):
 	s = ""
 	if (DegPolynom(F, coeffs) == -1):
 		return "0"
-	for i in range(len(coeffs)):
+	n = len(coeffs) - 1
+	for i in range(n, -1, -1):
+		if (coeffs[i] == FElement(F, 0)):
+			continue
+		if polynom == True:
+			coeff = str(coeffs[i])
+		else:
+			coeff = str(coeffs[i].f)
+
 		if i == 0:
-			degree = ""
+			monom = coeff
+			after = ""
 		elif i == 1:
-			degree = "*X"
+			monom = coeff + '*X'
+			after = " + *"
 		else:
-			degree = "*X^" + str(i)
-			
-		if i != 0 and s != "":
-			sign = "+ "
-		else:
-			sign = ""
-		if not (coeffs[i] == FElement(F, 0)):
-			if polynom == True:
-				s = s + sign + "(" + str(coeffs[i]) + ")" + degree + " "
-			else:
-				s = s + sign + str(coeffs[i].f) + degree + " "
+			monom = coeff + "*X^" + str(i)
+			after = " + "
+
+		s = s + monom + after
 	return s
 
 def PolynomCorrect(F, x):
