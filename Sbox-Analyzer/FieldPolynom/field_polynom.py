@@ -43,7 +43,7 @@ def StrPolynom(F, coeffs, polynom = False, isTex = False):
 				after = ""
 			elif i == 1:
 				monom = coeff + 'X'
-				after = " + *"
+				after = " + "
 			else:
 				monom = coeff + "X^{" + str(i) + "}"
 				after = " + "
