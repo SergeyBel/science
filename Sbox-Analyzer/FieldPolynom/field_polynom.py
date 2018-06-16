@@ -24,7 +24,7 @@ def DegPolynom(F, coeffs):
 		i = i - 1
 	return i
 	
-def StrPolynom(F, coeffs, polynom = False):
+def StrPolynom(F, coeffs, polynom = False, isTex = False):
 	s = ""
 	if (DegPolynom(F, coeffs) == -1):
 		return "0"
@@ -37,17 +37,30 @@ def StrPolynom(F, coeffs, polynom = False):
 		else:
 			coeff = str(coeffs[i].f)
 
-		if i == 0:
-			monom = coeff
-			after = ""
-		elif i == 1:
-			monom = coeff + '*X'
-			after = " + *"
+		if (isTex == True):
+			if i == 0:
+				monom = coeff
+				after = ""
+			elif i == 1:
+				monom = coeff + 'X'
+				after = " + *"
+			else:
+				monom = coeff + "X^{" + str(i) + "}"
+				after = " + "
 		else:
-			monom = coeff + "*X^" + str(i)
-			after = " + "
+			if i == 0:
+				monom = coeff
+				after = ""
+			elif i == 1:
+				monom = coeff + '*X'
+				after = " + *"
+			else:
+				monom = coeff + "*X^" + str(i)
+				after = " + "
 
 		s = s + monom + after
+
+
 	return s
 
 def PolynomCorrect(F, x):
@@ -267,6 +280,8 @@ class FPolynom:
 			self.c[i] = FElement(self.field, 0)
 		self.Correct()
 
+	def TexString(self):
+		return StrPolynom(self.field, self.c, False, True)
 
 
 		
