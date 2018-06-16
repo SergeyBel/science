@@ -29,6 +29,7 @@ def StrPolynom(F, coeffs, polynom = False, isTex = False):
 	if (DegPolynom(F, coeffs) == -1):
 		return "0"
 	n = len(coeffs) - 1
+	first = True
 	for i in range(n, -1, -1):
 		if (coeffs[i] == FElement(F, 0)):
 			continue
@@ -37,29 +38,28 @@ def StrPolynom(F, coeffs, polynom = False, isTex = False):
 		else:
 			coeff = str(coeffs[i].f)
 
+		if (coeff == '1' and i != 0):
+			coeff = ''
+
+
+		before = " + "
+		power = str(i)
+
 		if (isTex == True):
-			if i == 0:
-				monom = coeff
-				after = ""
-			elif i == 1:
-				monom = coeff + 'X'
-				after = " + "
-			else:
-				monom = coeff + "X^{" + str(i) + "}"
-				after = " + "
+			power = "{" + power + "}"
+
+		if (first == True):
+			before = ""
+			first = False
+
+		if i == 0:
+			monom = coeff
+		elif i == 1:
+			monom = coeff + 'X'
 		else:
-			if i == 0:
-				monom = coeff
-				after = ""
-			elif i == 1:
-				monom = coeff + '*X'
-				after = " + *"
-			else:
-				monom = coeff + "*X^" + str(i)
-				after = " + "
+			monom = coeff + "X^" + power
 
-		s = s + monom + after
-
+		s = s + before + monom
 
 	return s
 
