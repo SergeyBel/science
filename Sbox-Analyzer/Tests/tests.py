@@ -89,6 +89,24 @@ def TestDegBool2():
 	f = "0000010100110110"
 	answer = 2
 	Test(Deg(f), answer)
+
+def TestIsMonotone1():
+	print "TestIsMonotone1:",	
+	f = "00010111"
+	answer = True
+	Test(IsMonotone(f), answer)
+
+def TestIsMonotone2():
+	print "TestIsMonotone2:",	
+	f = "0110"
+	answer = False
+	Test(IsMonotone(f), answer)
+
+def TestIsMonotone3():
+	print "TestIsMonotone3:",	
+	f = "1011"
+	answer = False
+	Test(IsMonotone(f), answer)
 	
 	
 
@@ -550,6 +568,9 @@ def BoolSuite():
 	TestDegBool2()
 	TestIsLinearBool1()
 	TestIsLinearBool2()
+	TestIsMonotone1()
+	TestIsMonotone2()
+	TestIsMonotone3()
 
 
 	

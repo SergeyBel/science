@@ -170,5 +170,17 @@ def BooleanToList(f):
 	for i in range(len(f)):
 		c.append(int(f[i]))
 	return c
+
+def IsMonotone(f):
+	length = len(f)
+	if length == 1:
+		return True
+	leftPart = f[:length / 2]
+	rightPart = f[length / 2:]
+	for i in range(len(leftPart)):
+		if int(leftPart[i]) > int(rightPart[i]):
+			return False
+	return IsMonotone(leftPart) and IsMonotone(rightPart)
+
 	
 	
