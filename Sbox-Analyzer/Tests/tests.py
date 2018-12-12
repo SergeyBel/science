@@ -8,6 +8,7 @@ sys.path.append("../Cryptonalysis")
 sys.path.append("../FieldPolynom")
 sys.path.append("../FieldMatrix")
 sys.path.append("../Algorithms")
+sys.path.append("../SymbolPolynom")
 from DifferentialCryptanalisys import *
 from LineCryptoanalisys import *
 import ffield
@@ -20,6 +21,7 @@ from field_polynom import *
 from field_polynom_algorithms import *
 from Berlekamp import *
 from fieldmatrix import *
+from symbol_element import *
 
 
 
@@ -558,6 +560,66 @@ def MatrixInverse():
 	ans.SetRow(3, [FElement(F, 1), FElement(F, 0), FElement(F, 0), FElement(F, 0)])
 	Test(inv, ans)
 
+def SMonomMul1():
+	print 'SMonomMul1',
+	a = SMonom('a')
+	b = SMonom('b')
+	s = a * b
+	ans = SMonom('ab')
+	Test(ans, s)
+
+def SMonomMul2():
+	print 'SSMonomMul2',
+	a = SMonom('a')
+	b = SMonom('b')
+	c = SMonom('c')
+	s = c * a * b
+	ans = SMonom('abc')
+	Test(ans, s)
+
+def SElementAdd1():
+	print 'SElementAdd1',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('b')])
+	ans = SElement([SMonom('a'), SMonom('b')])
+	Test(ans, a + b)
+
+def SElementAdd2():
+	print 'SElementAdd2',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('b')])
+	c = SElement([SMonom('c')])
+	ans = SElement([SMonom('a'), SMonom('b'), SMonom('c')])
+	Test(ans, c + a + b)
+
+def SElementAdd3():
+	print 'SElementAdd3',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('a')])
+	ans = SElement([])
+	Test(ans, a + b)
+
+def SElementMul1():
+	print 'SElementMul1',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('a')])
+	ans = SElement([SMonom('a')])
+	Test(ans, a * b)
+
+def SElementMul2():
+	print 'SElementMul2',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('b')])
+	ans = SElement([SMonom('ab')])
+	Test(ans, a * b)
+
+def SElementMul3():
+	print 'SElementMul3',
+	a = SElement([SMonom('a')])
+	b = SElement([SMonom('b'), SMonom('c')])
+	ans = SElement([SMonom('ab'), SMonom('ac')])
+	Test(ans, a * b)
+
 	
 def BoolSuite():
 	TestZhegalkin1()
@@ -635,6 +697,18 @@ def MatrixSuite():
 	MatrixGetRow1()
 	MatrixGetColumn1()
 	MatrixInverse()
+
+def SMonomSuite():
+	SMonomMul1()
+	SMonomMul2()
+
+def SElementSuite():
+	SElementAdd1()
+	SElementAdd2()
+	SElementAdd3()
+	SElementMul1()
+	SElementMul2()
+	SElementMul3()
 	
 
 BoolSuite()
@@ -643,6 +717,8 @@ PolynomSuite()
 AlgorithmSuite()
 PermutationSuite()
 MatrixSuite()
+SMonomSuite()
+SElementSuite()
 
 print
 print "OK: ", success
