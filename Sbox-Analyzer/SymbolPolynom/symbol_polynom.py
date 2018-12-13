@@ -48,16 +48,17 @@ class SPolynom:
 
 
   def toString(self):
-    if (len(self.coeffs) == 1 and self.coeffs[0] == SElement([])):
+    zero = SElement('0')
+    if (len(self.coeffs) == 1 and self.coeffs[0] == zero):
       return '0'
     s = []
     for i in range(len(self.coeffs)):
       element  = self.coeffs[i]
-      if element.len() == 0:
+      if element == zero:
         monom = ''
       else:
         if element.len() == 1:
-          if (element == SElement('1')):
+          if (element == SElement('1') and i != 0):
             coeff = ''
           else:
             coeff = self.coeffs[i].toString()
