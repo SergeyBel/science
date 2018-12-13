@@ -17,6 +17,9 @@ class SMonom:
     coeffs = list(set(self.coeffs + other.coeffs))
     return SMonom(coeffs)
 
+  def __pow__(self, n):
+    return self
+
   def __str__(self):
     return self.toString()
 

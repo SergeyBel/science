@@ -43,6 +43,9 @@ class SElement:
         coeffs.add(c)
     return SElement(list(coeffs))
 
+  def __pow__(self, n):
+    return self
+
   def __str__(self):
    return self.toString()
 

@@ -29,6 +29,24 @@ class SPolynom:
     ans[n:m] = c[n:m]
     return SPolynom(ans)
 
+  def __mul__(self, other):
+    NullElement = SElement([])
+    lenX = len(self.coeffs)
+    lenY = len(other.coeffs)
+    n = lenX + lenY - 1
+    ans = [NullElement] * n
+    for i in range(0, lenX):
+      for j in range(0, lenY):
+        ans[i + j] += self.coeffs[i] * other.coeffs[j]
+    return SPolynom(ans)
+
+  def __pow__(self, n):
+    p = SPolynom(self.coeffs)
+    for i in range(n - 1):
+      p = p * self
+    return p
+
+
   def toString(self):
     if (len(self.coeffs) == 1 and self.coeffs[0] == SElement([])):
       return '0'
