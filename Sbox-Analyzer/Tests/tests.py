@@ -21,7 +21,7 @@ from field_polynom import *
 from field_polynom_algorithms import *
 from Berlekamp import *
 from fieldmatrix import *
-from symbol_element import *
+from symbol_polynom import *
 
 
 
@@ -620,6 +620,35 @@ def SElementMul3():
 	ans = SElement([SMonom('ab'), SMonom('ac')])
 	Test(ans, a * b)
 
+def SPolynomAdd1():
+	print 'SPolynomAdd1',
+	a = SPolynom([SElement('a')])
+	b = SPolynom([SElement('b')])
+	ans = SPolynom([SElement([SMonom('a'), SMonom('b')])])
+	Test(ans, a + b)
+
+def SPolynomAdd2():
+	print 'SPolynomAdd2',
+	a = SPolynom([SElement('a'), SElement('c')])
+	b = SPolynom([SElement('a')])
+	ans = SPolynom([SElement([]), SElement('c')])
+	Test(ans, a + b)
+
+def SPolynomAdd3():
+	print 'SPolynomAdd3',
+	a = SPolynom([SElement('a')])
+	b = SPolynom([SElement('a')])
+	ans = SPolynom([SElement('')])
+	Test(ans, a + b)
+
+def SPolynomAdd4():
+	print 'SPolynomAdd4',
+	a = SPolynom([SElement('a'), SElement('b'), SElement('c')])
+	b = SPolynom([SElement('b'), SElement('c'), SElement('a')])
+	ans = SPolynom([SElement(['a', 'b']), SElement(['b', 'c']), SElement(['a', 'c'])])
+	Test(ans, a + b)
+
+
 	
 def BoolSuite():
 	TestZhegalkin1()
@@ -709,6 +738,12 @@ def SElementSuite():
 	SElementMul1()
 	SElementMul2()
 	SElementMul3()
+
+def SPolynomSuite():
+	SPolynomAdd1()
+	SPolynomAdd2()
+	SPolynomAdd3()
+	SPolynomAdd4()
 	
 
 BoolSuite()
@@ -719,6 +754,7 @@ PermutationSuite()
 MatrixSuite()
 SMonomSuite()
 SElementSuite()
+SPolynomSuite()
 
 print
 print "OK: ", success

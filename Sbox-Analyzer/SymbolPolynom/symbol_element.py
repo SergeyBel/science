@@ -2,7 +2,20 @@ from symbol_monom import *
 
 class SElement:
   def __init__(self, coeffs):
-      self.coeffs = sorted(coeffs)
+    newCoeffs = []
+    for c in coeffs:
+      if isinstance(c, str):
+        newCoeffs.append(SMonom(c))
+      else:
+        newCoeffs.append(c)
+    self.coeffs = newCoeffs
+    self.normilize()
+
+  def normilize(self):
+    self.coeffs = sorted(self.coeffs)
+
+  def len(self):
+    return len(self.coeffs)
 
   def __add__(self, other):
     otherCoeffs = other.coeffs
