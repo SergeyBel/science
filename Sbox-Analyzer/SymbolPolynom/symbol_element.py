@@ -12,7 +12,12 @@ class SElement:
     self.normilize()
 
   def normilize(self):
-    self.coeffs = sorted(self.coeffs)
+    null = SMonom('0')
+    clearCoeffs = []
+    for c in self.coeffs:
+      if c != null:
+        clearCoeffs.append(c)
+    self.coeffs = sorted(clearCoeffs)
 
   def len(self):
     return len(self.coeffs)

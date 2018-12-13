@@ -14,8 +14,17 @@ class SMonom:
     return ''.join(self.coeffs)
 
   def __mul__(self, other):
-    coeffs = list(set(self.coeffs + other.coeffs))
-    return SMonom(coeffs)
+    null = SMonom('0')
+    if (self == null or other == null):
+      return null
+    one = SMonom('1')
+    if (self == one):
+      return other
+    elif (other == one):
+      return self
+    else:
+      coeffs = list(set(self.coeffs + other.coeffs))
+      return SMonom(coeffs)
 
   def __pow__(self, n):
     return self

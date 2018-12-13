@@ -57,7 +57,10 @@ class SPolynom:
         monom = ''
       else:
         if element.len() == 1:
-          coeff = self.coeffs[i].toString()
+          if (element == SElement('1')):
+            coeff = ''
+          else:
+            coeff = self.coeffs[i].toString()
         else:
           coeff = '(' + self.coeffs[i].toString() + ')'
         if (i  == 0):
