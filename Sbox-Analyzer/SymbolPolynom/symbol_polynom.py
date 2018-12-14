@@ -1,15 +1,20 @@
 from symbol_element import *
 
 class SPolynom:
-  def __init__(self, coeffs):
+  def __init__(self, coeffs, maxPower = 0):
     self.coeffs = coeffs
+    self.maxPower = maxPower
     self.normilize()
 
   def normilize(self):
-    x = self.coeffs
     NullElem = SElement([])
+    if (self.maxPower > 0 and len(self.coeffs) - 1 >= self.maxPower):
+      for i in range(self.maxPower, len(self.coeffs)):
+        self.coeffs[i - self.maxPower + 1] += self.coeffs[i]
+        self.coeffs[i] = NullElem
     while (len(self.coeffs) > 1  and self.coeffs[-1] == NullElem):
       del self.coeffs[-1]
+
 
   def __add__(self, other):
     lenX = len(self.coeffs)
@@ -27,7 +32,7 @@ class SPolynom:
     for i in range(n):
       ans.append(self.coeffs[i] + other.coeffs[i])
     ans[n:m] = c[n:m]
-    return SPolynom(ans)
+    return SPolynom(ans, self.maxPower)
 
   def __mul__(self, other):
     NullElement = SElement([])
@@ -38,10 +43,10 @@ class SPolynom:
     for i in range(0, lenX):
       for j in range(0, lenY):
         ans[i + j] += self.coeffs[i] * other.coeffs[j]
-    return SPolynom(ans)
+    return SPolynom(ans, self.maxPower)
 
   def __pow__(self, n):
-    p = SPolynom(self.coeffs)
+    p = SPolynom(self.coeffs, self.maxPower)
     for i in range(n - 1):
       p = p * self
     return p
@@ -77,5 +82,13 @@ class SPolynom:
   def __str__(self):
     return self.toString()
 
+  def __hash__(self):
+    return hash(self.toString())
+
   def __eq__(self, other):
     return self.coeffs == other.coeffs
+
+  def getCoeff(self, deg):
+    if (len(self.coeffs) - 1 < deg):
+      return SElement('0')
+    return self.coeffs[deg]
