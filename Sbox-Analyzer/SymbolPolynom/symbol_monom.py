@@ -14,9 +14,9 @@ class SMonom:
     return ''.join(self.coeffs)
 
   def __mul__(self, other):
-    null = SMonom('0')
-    if (self == null or other == null):
-      return null
+    zero = SMonom('0')
+    if (self == zero or other == zero):
+      return zero
     one = SMonom('1')
     if (self == one):
       return other

@@ -7,12 +7,12 @@ class SPolynom:
     self.normilize()
 
   def normilize(self):
-    NullElem = SElement([])
+    zero = SElement(['0'])
     if (self.maxPower > 0 and len(self.coeffs) - 1 >= self.maxPower):
       for i in range(self.maxPower, len(self.coeffs)):
         self.coeffs[i - self.maxPower + 1] += self.coeffs[i]
-        self.coeffs[i] = NullElem
-    while (len(self.coeffs) > 1  and self.coeffs[-1] == NullElem):
+        self.coeffs[i] = zero
+    while (len(self.coeffs) > 1  and self.coeffs[-1] == zero):
       del self.coeffs[-1]
 
 
@@ -35,11 +35,11 @@ class SPolynom:
     return SPolynom(ans, self.maxPower)
 
   def __mul__(self, other):
-    NullElement = SElement([])
+    zero = SElement(['0'])
     lenX = len(self.coeffs)
     lenY = len(other.coeffs)
     n = lenX + lenY - 1
-    ans = [NullElement] * n
+    ans = [zero] * n
     for i in range(0, lenX):
       for j in range(0, lenY):
         ans[i + j] += self.coeffs[i] * other.coeffs[j]
