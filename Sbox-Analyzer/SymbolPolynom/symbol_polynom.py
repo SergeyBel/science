@@ -92,3 +92,6 @@ class SPolynom:
     if (len(self.coeffs) - 1 < deg):
       return SElement('0')
     return self.coeffs[deg]
+
+  def copy(self):
+    return SPolynom(self.coeffs, self.maxPower)

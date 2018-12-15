@@ -645,6 +645,13 @@ def SElementAdd5():
 	ans = SElement(['a', '1'])
 	Test(ans, a + b)
 
+def SElementAdd6():
+	print 'SElementAdd6',
+	a = SElement('a1')
+	b = SElement('a2')
+	ans = SElement(['a1', 'a2'])
+	Test(ans, a + b)
+
 def SElementMul1():
 	print 'SElementMul1',
 	a = SElement([SMonom('a')])
@@ -698,7 +705,7 @@ def SPolynomAdd3():
 	print 'SPolynomAdd3',
 	a = SPolynom([SElement('a')])
 	b = SPolynom([SElement('a')])
-	ans = SPolynom([SElement('')])
+	ans = SPolynom([SElement('0')])
 	Test(ans, a + b)
 
 def SPolynomAdd4():
@@ -869,6 +876,7 @@ def SElementSuite():
 	SElementMul3()
 	SElementMul4()
 	SElementMul5()
+	SElementAdd6()
 
 def SPolynomSuite():
 	SPolynomAdd1()

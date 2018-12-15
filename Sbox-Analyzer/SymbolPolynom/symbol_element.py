@@ -2,6 +2,8 @@ from symbol_monom import *
 
 class SElement:
   def __init__(self, coeffs):
+    if not isinstance(coeffs, list):
+      coeffs = [coeffs]
     newCoeffs = []
     for c in coeffs:
       if isinstance(c, str):
@@ -35,6 +37,8 @@ class SElement:
     return SElement(coeffs)
 
   def toString(self):
+    if len(self.coeffs) == 0:
+      return '0'
     s = []
     for c in self.coeffs:
       s.append(c.toString())
