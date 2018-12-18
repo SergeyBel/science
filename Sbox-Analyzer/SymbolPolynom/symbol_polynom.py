@@ -98,3 +98,7 @@ class SPolynom:
 
   def deg(self):
     return len(self.coeffs) - 1
+
+  def shift(self, n):
+    coeffs = [SElement('0')] * n + self.coeffs
+    return SPolynom(coeffs, self.maxPower)

@@ -776,8 +776,23 @@ def SPolynomExpr1():
 	ans = SPolynom([SElement('a'), SElement('a'), SElement(['ab']), SElement('b'), SElement('a'), SElement('1')])	
 	Test(ans, a * b ** 2)
 
+def SPolynomShift1():
+	print 'SPolynomShift1',
+	a = SPolynom([SElement('a'), SElement('1')])
+	ans = SPolynom([SElement('0'),SElement('a'), SElement('1')])
+	Test(ans, a.shift(1))
 
+def SPolynomShift2():
+	print 'SPolynomShift2',
+	a = SPolynom([SElement('a'), SElement('1')])
+	ans = SPolynom([SElement('0'), SElement('0'), SElement('a'), SElement('1')])
+	Test(ans, a.shift(2))
 
+def SPolynomShift3():
+	print 'SPolynomShift3',
+	a = SPolynom([SElement('a'), SElement('1')])
+	ans = a
+	Test(a, a.shift(0))
 
 	
 def BoolSuite():
@@ -892,6 +907,9 @@ def SPolynomSuite():
 	SPolynoPow1()
 	SPolynoPow2()
 	SPolynomExpr1()
+	SPolynomShift1()
+	SPolynomShift2()
+	SPolynomShift3()
 	
 
 BoolSuite()
