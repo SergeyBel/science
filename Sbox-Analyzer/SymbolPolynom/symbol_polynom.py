@@ -46,8 +46,8 @@ class SPolynom:
     return SPolynom(ans, self.maxPower)
 
   def __pow__(self, n):
-    p = SPolynom(self.coeffs, self.maxPower)
-    for i in range(n - 1):
+    p = SPolynom([SElement('1')], self.maxPower) 
+    for i in range(n):
       p = p * self
     return p
 
@@ -95,3 +95,6 @@ class SPolynom:
 
   def copy(self):
     return SPolynom(self.coeffs, self.maxPower)
+
+  def deg(self):
+    return len(self.coeffs) - 1
