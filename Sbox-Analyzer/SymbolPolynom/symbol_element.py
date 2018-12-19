@@ -45,11 +45,14 @@ class SElement:
     return ' + '.join(s)
 
   def __mul__(self, other):
-    coeffs = set()
+    coeffs = list()
     for a in self.coeffs:
       for b in other.coeffs:
         c = a * b
-        coeffs.add(c)
+        if c in coeffs:
+          coeffs.remove(c)
+        else:
+          coeffs.append(c)
     return SElement(list(coeffs))
 
   def __pow__(self, n):
@@ -59,6 +62,11 @@ class SElement:
    return self.toString()
 
   def __eq__(self, other):
-    return self.toString() == other.toString()
+    if len(self.coeffs) != len(other.coeffs):
+      return False
+    for i in range (len(self.coeffs)):
+      if self.coeffs[i] != other.coeffs[i]:
+        return False
+    return True
 
 

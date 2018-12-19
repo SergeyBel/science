@@ -46,11 +46,15 @@ class SPolynom:
     return SPolynom(ans, self.maxPower)
 
   def __pow__(self, n):
-    p = SPolynom([SElement('1')], self.maxPower) 
-    for i in range(n):
-      p = p * self
+    
+    x = self
+    p = SPolynom([SElement('1')], self.maxPower)
+    while n: 
+      if n % 2:
+        p *= x
+      x *= x
+      n //= 2
     return p
-
 
   def toString(self):
     zero = SElement('0')

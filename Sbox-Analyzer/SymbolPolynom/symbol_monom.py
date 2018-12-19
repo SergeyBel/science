@@ -33,7 +33,12 @@ class SMonom:
     return self.toString()
 
   def __eq__(self, other):
-    return self.toString() == other.toString()
+    if len(self.coeffs) != len(other.coeffs):
+      return False
+    for i in range (len(self.coeffs)):
+      if self.coeffs[i] != other.coeffs[i]:
+        return False
+    return True
 
   def __hash__(self):
     return hash(self.toString())

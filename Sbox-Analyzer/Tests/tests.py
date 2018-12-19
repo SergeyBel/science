@@ -565,7 +565,7 @@ def SMonomMul1():
 	a = SMonom('a')
 	b = SMonom('b')
 	s = a * b
-	ans = SMonom('ab')
+	ans = SMonom(['a', 'b'])
 	Test(ans, s)
 
 def SMonomMul2():
@@ -574,7 +574,7 @@ def SMonomMul2():
 	b = SMonom('b')
 	c = SMonom('c')
 	s = c * a * b
-	ans = SMonom('abc')
+	ans = SMonom(['a', 'b', 'c'])
 	Test(ans, s)
 
 def SMonomMul3():
@@ -687,6 +687,13 @@ def SElementMul5():
 	ans = SElement([SMonom('0')])
 	Test(ans, a * b)
 
+def SElementMul6():
+	print 'SElementMul6',
+	a = SElement([SMonom(['a', 'b', 'c']), SMonom(['b', 'c'])])
+	b = SElement([SMonom('a')])
+	ans = SElement([SMonom('0')])
+	Test(ans, a * b)
+
 def SPolynomAdd1():
 	print 'SPolynomAdd1',
 	a = SPolynom([SElement('a')])
@@ -792,7 +799,36 @@ def SPolynomShift3():
 	print 'SPolynomShift3',
 	a = SPolynom([SElement('a'), SElement('1')])
 	ans = a
-	Test(a, a.shift(0))
+	Test(ans, a.shift(0))
+
+def SPolynomPow1():
+	print 'SPolynomPow1',
+	a = SPolynom([SElement('a'), SElement('b')])
+	ans = SPolynom([SElement('a'), SElement('ab'), SElement('ab'), SElement('b')])
+	Test(ans, a ** 3)
+
+def SPolynomPow2():
+	print 'SPolynomPow2',
+	a = SPolynom([SElement('a'), SElement('b')])
+	ans = SPolynom([SElement('1')])
+	Test(ans, a ** 0)
+
+def SPolynomPow3():
+	print 'SPolynomPow3',
+	a = SPolynom([SElement('a'), SElement('b')])
+	ans = SPolynom([SElement('a'), SElement('b')])
+	Test(ans, a ** 1)
+
+def SPolynomPow4():
+	print 'SPolynomPow4',
+	a = SPolynom([SElement('a'), SElement('b'), SElement('c')])
+	ansCoeff = [SElement('0')] * 17
+	ansCoeff[0] = SElement('a')
+	ansCoeff[8] = SElement('b')
+	ansCoeff[16] = SElement('c')
+	ans = SPolynom(ansCoeff)
+	Test(ans, a ** 8)
+
 
 	
 def BoolSuite():
@@ -807,8 +843,6 @@ def BoolSuite():
 	TestIsMonotone1()
 	TestIsMonotone2()
 	TestIsMonotone3()
-
-
 	
 	
 def FieldSuite():
@@ -886,12 +920,14 @@ def SElementSuite():
 	SElementAdd3()
 	SElementAdd4()
 	SElementAdd5()
+	SElementAdd6()
 	SElementMul1()
 	SElementMul2()
 	SElementMul3()
 	SElementMul4()
 	SElementMul5()
-	SElementAdd6()
+	SElementMul6()
+	
 
 def SPolynomSuite():
 	SPolynomAdd1()
@@ -910,6 +946,10 @@ def SPolynomSuite():
 	SPolynomShift1()
 	SPolynomShift2()
 	SPolynomShift3()
+	SPolynomPow1()
+	SPolynomPow2()
+	SPolynomPow3()
+	SPolynomPow4()
 	
 
 BoolSuite()
