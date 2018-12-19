@@ -36,6 +36,7 @@ def Test(value, answer):
 		success = success + 1
 	else:
 		print "[FAIL]"
+		print 'Mismatch', value, '=', answer
 		fail = fail + 1
 		
 
@@ -109,7 +110,6 @@ def TestIsMonotone3():
 	f = "1011"
 	answer = False
 	Test(IsMonotone(f), answer)
-	
 	
 
 def FuncPolynom1():
@@ -663,14 +663,14 @@ def SElementMul2():
 	print 'SElementMul2',
 	a = SElement([SMonom('a')])
 	b = SElement([SMonom('b')])
-	ans = SElement([SMonom('ab')])
+	ans = SElement([SMonom(['a', 'b'])])
 	Test(ans, a * b)
 
 def SElementMul3():
 	print 'SElementMul3',
 	a = SElement([SMonom('a')])
 	b = SElement([SMonom('b'), SMonom('c')])
-	ans = SElement([SMonom('ab'), SMonom('ac')])
+	ans = SElement([SMonom(['a', 'b']), SMonom(['a', 'c'])])
 	Test(ans, a * b)
 
 def SElementMul4():
@@ -726,7 +726,7 @@ def SPolynomMul1():
 	print 'SPolynomMul1',
 	a = SPolynom([SElement('a')])
 	b = SPolynom([SElement('b')])
-	ans = SPolynom([SElement(['ab'])])
+	ans = SPolynom([SElement([SMonom(['a', 'b'])])])
 	Test(ans, a * b)
 
 def SPolynomMul2():
@@ -737,31 +737,31 @@ def SPolynomMul2():
 	Test(ans, a * b)
 
 def SPolynomMul3():
-	print 'SPolynomMul4',
+	print 'SPolynomMul3',
 	a = SPolynom([SElement('a'), SElement('b')])
 	b = SPolynom([SElement('c')])
-	ans = SPolynom([SElement(['ac']), SElement(['bc'])])
+	ans = SPolynom([SElement(SMonom(['a', 'c'])), SElement(SMonom(['b', 'c']))])
 	Test(ans, a * b)
 
 def SPolynomMul4():
 	print 'SPolynomMul4',
 	a = SPolynom([SElement('a'), SElement('b')])
 	b = SPolynom([SElement('c'), SElement('d')])
-	ans = SPolynom([SElement(['ac']), SElement([SMonom('bc'), SMonom('ad')]), SElement(['bd'])])
+	ans = SPolynom([SElement(SMonom(['a', 'c'])), SElement([SMonom(['b', 'c']), SMonom(['a', 'd'])]), SElement(SMonom(['b', 'd']))])
 	Test(ans, a * b)
 
 def SPolynomMul5():
 	print 'SPolynomMul5',
 	a = SPolynom([SElement('a'), SElement('1')])
 	b = SPolynom([SElement('c')])
-	ans = SPolynom([SElement(['ac']), SElement(['c'])])
+	ans = SPolynom([SElement(SMonom(['a', 'c'])), SElement(['c'])])
 	Test(ans, a * b)
 
 def SPolynomMul6():
 	print 'SPolynomMul6',
 	a = SPolynom([SElement('a'), SElement('1')])
 	b = SPolynom([SElement('a'), SElement('0'), SElement('1')])
-	ans = SPolynom([SElement(['a']), SElement(['a']), SElement(['a']), SElement(['1']),])
+	ans = SPolynom([SElement(['a']), SElement(['a']), SElement(['a']), SElement(['1'])])
 	Test(ans, a * b)
 
 def SPolynoPow1():
@@ -780,7 +780,7 @@ def SPolynomExpr1():
 	print 'SPolynomExpr1',
 	a = SPolynom([SElement('a'), SElement('1')])
 	b = SPolynom([SElement('a'), SElement('b'), SElement('1')])
-	ans = SPolynom([SElement('a'), SElement('a'), SElement(['ab']), SElement('b'), SElement('a'), SElement('1')])	
+	ans = SPolynom([SElement('a'), SElement('a'), SElement(SMonom(['a', 'b'])), SElement('b'), SElement('a'), SElement('1')])	
 	Test(ans, a * b ** 2)
 
 def SPolynomShift1():
@@ -804,7 +804,7 @@ def SPolynomShift3():
 def SPolynomPow1():
 	print 'SPolynomPow1',
 	a = SPolynom([SElement('a'), SElement('b')])
-	ans = SPolynom([SElement('a'), SElement('ab'), SElement('ab'), SElement('b')])
+	ans = SPolynom([SElement('a'), SElement(SMonom(['a', 'b'])), SElement(SMonom(['a', 'b'])), SElement('b')])
 	Test(ans, a ** 3)
 
 def SPolynomPow2():

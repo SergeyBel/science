@@ -46,7 +46,6 @@ class SPolynom:
     return SPolynom(ans, self.maxPower)
 
   def __pow__(self, n):
-    
     x = self
     p = SPolynom([SElement('1')], self.maxPower)
     while n: 
@@ -90,7 +89,12 @@ class SPolynom:
     return hash(self.toString())
 
   def __eq__(self, other):
-    return self.coeffs == other.coeffs
+    if len(self.coeffs) != len(other.coeffs):
+      return False
+    for i in range(len(self.coeffs)):
+      if not (self.coeffs[i] == other.coeffs[i]):
+        return False
+    return True
 
   def getCoeff(self, deg):
     if (len(self.coeffs) - 1 < deg):

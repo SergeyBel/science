@@ -65,7 +65,7 @@ class SElement:
     if len(self.coeffs) != len(other.coeffs):
       return False
     for i in range (len(self.coeffs)):
-      if self.coeffs[i] != other.coeffs[i]:
+      if not (self.coeffs[i] == other.coeffs[i]):
         return False
     return True
 
