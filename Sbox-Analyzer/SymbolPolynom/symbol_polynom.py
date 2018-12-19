@@ -10,7 +10,10 @@ class SPolynom:
     zero = SElement(['0'])
     if (self.maxPower > 0 and len(self.coeffs) - 1 >= self.maxPower):
       for i in range(self.maxPower, len(self.coeffs)):
-        self.coeffs[i - self.maxPower + 1] += self.coeffs[i]
+        j = (i / self.maxPower + i % self.maxPower) % self.maxPower
+        if (j == 0):
+            j = 1
+        self.coeffs[j] += self.coeffs[i]
         self.coeffs[i] = zero
     while (len(self.coeffs) > 1  and self.coeffs[-1] == zero):
       del self.coeffs[-1]
@@ -109,4 +112,8 @@ class SPolynom:
 
   def shift(self, n):
     coeffs = [SElement('0')] * n + self.coeffs
+    return SPolynom(coeffs, self.maxPower)
+
+  def slice(self, deg):
+    coeffs = self.coeffs[:deg + 1]
     return SPolynom(coeffs, self.maxPower)
