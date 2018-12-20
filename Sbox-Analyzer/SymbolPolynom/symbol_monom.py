@@ -52,3 +52,9 @@ class SMonom:
       return 1
     else:
       return 0
+  def evaluate(self, values):
+    s = 1
+    for c in self.coeffs:
+      s *= values[c]
+    return s
+

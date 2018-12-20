@@ -117,3 +117,11 @@ class SPolynom:
   def slice(self, deg):
     coeffs = self.coeffs[:deg + 1]
     return SPolynom(coeffs, self.maxPower)
+
+  def evaluate(self, values):
+    s = ''
+    for i in range(len(self.coeffs)):
+      c = self.coeffs[i]
+      if c.evaluate(values):
+        s += 'X^' + str(i) + '+ '
+    return s

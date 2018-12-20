@@ -69,4 +69,10 @@ class SElement:
         return False
     return True
 
+  def evaluate(self, values):
+    s = 0
+    for c in self.coeffs:
+      s ^= c.evaluate(values)
+    return s
+
 
