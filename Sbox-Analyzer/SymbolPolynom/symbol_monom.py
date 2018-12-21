@@ -2,13 +2,8 @@
 class SMonom:
   def __init__(self, coeff):
     if isinstance(coeff, str):
-      self.coeffs = [coeff]
-    else:
-      self.coeffs = coeff
-    self.normilize()
-
-  def normilize(self):
-    self.coeffs = sorted(self.coeffs)
+      coeff = [coeff]
+    self.coeffs = set(coeff)
 
   def toString(self):
     return ''.join(self.coeffs)
@@ -23,7 +18,7 @@ class SMonom:
     elif (other == one):
       return self
     else:
-      coeffs = list(set(self.coeffs + other.coeffs))
+      coeffs = self.coeffs.union(other.coeffs)
       return SMonom(coeffs)
 
   def __pow__(self, n):
@@ -33,12 +28,7 @@ class SMonom:
     return self.toString()
 
   def __eq__(self, other):
-    if len(self.coeffs) != len(other.coeffs):
-      return False
-    for i in range (len(self.coeffs)):
-      if not (self.coeffs[i] == other.coeffs[i]):
-        return False
-    return True
+    return self.coeffs == other.coeffs
 
   def __hash__(self):
     return hash(self.toString())

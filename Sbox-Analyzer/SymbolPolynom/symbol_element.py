@@ -2,38 +2,26 @@ from symbol_monom import *
 
 class SElement:
   def __init__(self, coeffs):
-    if not isinstance(coeffs, list):
+    if not (isinstance(coeffs, list) or isinstance(coeffs, set)):
       coeffs = [coeffs]
-    newCoeffs = []
+    monoms = set()
     for c in coeffs:
       if isinstance(c, str):
-        newCoeffs.append(SMonom(c))
+        monoms.add(SMonom(c))
       else:
-        newCoeffs.append(c)
-    self.coeffs = newCoeffs
+        monoms.add(c)
+    self.coeffs = monoms
     self.normilize()
 
   def normilize(self):
     zero = SMonom('0')
-    clearCoeffs = []
-    for c in self.coeffs:
-      if c != zero:
-        clearCoeffs.append(c)
-    self.coeffs = sorted(clearCoeffs)
+    self.coeffs.discard(zero)
 
   def len(self):
     return len(self.coeffs)
 
   def __add__(self, other):
-    otherCoeffs = other.coeffs
-    coeffs = []
-    for c in self.coeffs:
-      if c in otherCoeffs:
-        otherCoeffs.remove(c)
-      else:
-        coeffs.append(c)
-    for c in otherCoeffs:
-      coeffs.append(c)
+    coeffs = self.coeffs.symmetric_difference(other.coeffs)
     return SElement(coeffs)
 
   def toString(self):
@@ -45,15 +33,15 @@ class SElement:
     return ' + '.join(s)
 
   def __mul__(self, other):
-    coeffs = list()
+    coeffs = set()
     for a in self.coeffs:
       for b in other.coeffs:
         c = a * b
         if c in coeffs:
           coeffs.remove(c)
         else:
-          coeffs.append(c)
-    return SElement(list(coeffs))
+          coeffs.add(c)
+    return SElement(coeffs)
 
   def __pow__(self, n):
     return self
@@ -62,12 +50,7 @@ class SElement:
    return self.toString()
 
   def __eq__(self, other):
-    if len(self.coeffs) != len(other.coeffs):
-      return False
-    for i in range (len(self.coeffs)):
-      if not (self.coeffs[i] == other.coeffs[i]):
-        return False
-    return True
+    return self.coeffs == other.coeffs
 
   def evaluate(self, values):
     s = 0

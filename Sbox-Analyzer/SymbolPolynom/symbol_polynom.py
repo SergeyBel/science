@@ -1,19 +1,27 @@
 from symbol_element import *
 
 class SPolynom:
-  def __init__(self, coeffs, maxPower = 0):
+  def __init__(self, coeffs, n = 0, table = False):
     self.coeffs = coeffs
-    self.maxPower = maxPower
+    self.n = n
+    self.maxPower = 2 ** n
+    self.table = table
     self.normilize()
 
   def normilize(self):
     zero = SElement(['0'])
-    if (self.maxPower > 0 and len(self.coeffs) - 1 >= self.maxPower):
+    if (self.n > 0 and len(self.coeffs) - 1 >= self.maxPower):
       for i in range(self.maxPower, len(self.coeffs)):
         j = (i / self.maxPower + i % self.maxPower) % self.maxPower
         if (j == 0):
             j = 1
         self.coeffs[j] += self.coeffs[i]
+        self.coeffs[i] = zero
+    if (self.table):
+      for i in range(self.n, len(self.coeffs)):
+        t = self.table[i]
+        for j in range(self.n):
+          self.coeffs[j] += self.coeffs[i] * t.coeffs[j]
         self.coeffs[i] = zero
     while (len(self.coeffs) > 1  and self.coeffs[-1] == zero):
       del self.coeffs[-1]
@@ -35,7 +43,7 @@ class SPolynom:
     for i in range(n):
       ans.append(self.coeffs[i] + other.coeffs[i])
     ans[n:m] = c[n:m]
-    return SPolynom(ans, self.maxPower)
+    return SPolynom(ans, self.n, self.table)
 
   def __mul__(self, other):
     zero = SElement(['0'])
@@ -46,11 +54,11 @@ class SPolynom:
     for i in range(0, lenX):
       for j in range(0, lenY):
         ans[i + j] += self.coeffs[i] * other.coeffs[j]
-    return SPolynom(ans, self.maxPower)
+    return SPolynom(ans, self.n, self.table)
 
   def __pow__(self, n):
     x = self
-    p = SPolynom([SElement('1')], self.maxPower)
+    p = SPolynom([SElement('1')], self.n, self.table)
     while n: 
       if n % 2:
         p *= x
@@ -105,23 +113,23 @@ class SPolynom:
     return self.coeffs[deg]
 
   def copy(self):
-    return SPolynom(self.coeffs, self.maxPower)
+    return SPolynom(self.coeffs, self.n, self.table)
 
   def deg(self):
     return len(self.coeffs) - 1
 
   def shift(self, n):
     coeffs = [SElement('0')] * n + self.coeffs
-    return SPolynom(coeffs, self.maxPower)
+    return SPolynom(coeffs, self.n, self.table)
 
   def slice(self, deg):
     coeffs = self.coeffs[:deg + 1]
-    return SPolynom(coeffs, self.maxPower)
+    return SPolynom(coeffs, self.n, self.table)
 
   def evaluate(self, values):
-    s = ''
+    s = 0
     for i in range(len(self.coeffs)):
       c = self.coeffs[i]
       if c.evaluate(values):
-        s += 'X^' + str(i) + '+ '
+        s += 2 ** i
     return s
