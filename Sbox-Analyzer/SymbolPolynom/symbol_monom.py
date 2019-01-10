@@ -31,17 +31,11 @@ class SMonom:
     return self.coeffs == other.coeffs
 
   def __hash__(self):
-    return hash(self.toString())
+    return hash(len(self.coeffs))
 
   def __cmp__(self, other):
-    a = self.toString()
-    b = other.toString()
-    if a < b:
-      return -1
-    elif a > b:
-      return 1
-    else:
-      return 0
+    return self.coeffs < other.coeffs;
+
   def evaluate(self, values):
     s = 1
     for c in self.coeffs:

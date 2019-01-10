@@ -10,7 +10,7 @@ class SPolynom:
 
   def normilize(self):
     zero = SElement(['0'])
-    if (self.n > 0 and len(self.coeffs) - 1 >= self.maxPower):
+    if (self.n > 0 and len(self.coeffs) > self.maxPower):
       for i in range(self.maxPower, len(self.coeffs)):
         j = (i / self.maxPower + i % self.maxPower) % self.maxPower
         if (j == 0):
@@ -20,8 +20,9 @@ class SPolynom:
     if (self.table):
       for i in range(self.n, len(self.coeffs)):
         t = self.table[i]
+        c = self.coeffs[i]
         for j in range(self.n):
-          self.coeffs[j] += self.coeffs[i] * t.coeffs[j]
+          self.coeffs[j] += c * t.coeffs[j]
         self.coeffs[i] = zero
     while (len(self.coeffs) > 1  and self.coeffs[-1] == zero):
       del self.coeffs[-1]
@@ -51,8 +52,8 @@ class SPolynom:
     lenY = len(other.coeffs)
     n = lenX + lenY - 1
     ans = [zero] * n
-    for i in range(0, lenX):
-      for j in range(0, lenY):
+    for i in range(lenX):
+      for j in range(lenY):
         ans[i + j] += self.coeffs[i] * other.coeffs[j]
     return SPolynom(ans, self.n, self.table)
 
@@ -97,15 +98,10 @@ class SPolynom:
     return self.toString()
 
   def __hash__(self):
-    return hash(self.toString())
+    return hash(len(self.coeffs))
 
   def __eq__(self, other):
-    if len(self.coeffs) != len(other.coeffs):
-      return False
-    for i in range(len(self.coeffs)):
-      if not (self.coeffs[i] == other.coeffs[i]):
-        return False
-    return True
+    return self.coeffs == other.coeffs
 
   def getCoeff(self, deg):
     if (len(self.coeffs) - 1 < deg):

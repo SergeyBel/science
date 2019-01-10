@@ -2,15 +2,18 @@ from symbol_monom import *
 
 class SElement:
   def __init__(self, coeffs):
-    if not (isinstance(coeffs, list) or isinstance(coeffs, set)):
-      coeffs = [coeffs]
-    monoms = set()
-    for c in coeffs:
-      if isinstance(c, str):
-        monoms.add(SMonom(c))
-      else:
-        monoms.add(c)
-    self.coeffs = monoms
+    if (isinstance(coeffs, set)):
+      self.coeffs = coeffs
+    else:
+      if not (isinstance(coeffs, list)):
+        coeffs = [coeffs]
+      monoms = set()
+      for c in coeffs:
+        if isinstance(c, str):
+          monoms.add(SMonom(c))
+        else:
+          monoms.add(c)
+      self.coeffs = monoms
     self.normilize()
 
   def normilize(self):
