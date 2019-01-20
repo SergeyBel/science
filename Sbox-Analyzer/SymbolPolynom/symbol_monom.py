@@ -4,6 +4,7 @@ class SMonom:
     if isinstance(coeff, str):
       coeff = [coeff]
     self.coeffs = set(coeff)
+    self.strRepresentation = self.toString()
 
   def toString(self):
     return ''.join(self.coeffs)
@@ -25,13 +26,13 @@ class SMonom:
     return self
 
   def __str__(self):
-    return self.toString()
+    return self.strRepresentation
 
   def __eq__(self, other):
     return self.coeffs == other.coeffs
 
   def __hash__(self):
-    return hash(len(self.coeffs))
+    return hash(self.strRepresentation)
 
   def __cmp__(self, other):
     return self.coeffs < other.coeffs;

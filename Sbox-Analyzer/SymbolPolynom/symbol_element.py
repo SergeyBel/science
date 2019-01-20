@@ -36,15 +36,20 @@ class SElement:
     return ' + '.join(s)
 
   def __mul__(self, other):
-    coeffs = set()
+    coeffs = {}
     for a in self.coeffs:
       for b in other.coeffs:
         c = a * b
-        if c in coeffs:
-          coeffs.remove(c)
+        if coeffs.get(c) != None:
+          coeffs[c] = not coeffs[c]
         else:
-          coeffs.add(c)
-    return SElement(coeffs)
+          coeffs[c] = True
+        
+    result = set()
+    for k in coeffs.keys():
+      if coeffs[k]:
+        result.add(k)
+    return SElement(result)
 
   def __pow__(self, n):
     return self
